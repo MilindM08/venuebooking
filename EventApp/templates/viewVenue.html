@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+         Ecart | ViewVenues
+{% endblock  %}
+{% block body%}
+
+<div class="row">
+    <!-- {% for venues in venues %}
+    <div class="col-md-4 mt-3 p-3">
+        <img src="{{venues.image.url}}" class="card-img-top" alt="products" style="width:100%; height:300px; object-fit:cover;border-radius: 10%  5% 5% 5%;">
+   </div>
+   <div class="col-md-8 mt-3 p-3">
+    <div class="card-body">
+        <h5 class="card-title">Name:{{venues.vname}}</h5>
+        <p class="card-text">Description:{{venues.desc}}</p>
+        <p class="card-text">Price:{{venues.price}}</p>
+        <h5 class="card-title"><b><i class="bi bi-geo-alt">{{venues.state}}</i></b></h5>
+        <p class="card-text"><i class="bi bi-geo-fill">{{venues.location}}</p></i>
+      </div>
+       <a href="/booking/{{venues.vid}}"><button type="button" class="btn btn-danger">Booking</button></a>
+       <a href="/"><button type="button" class="btn btn-danger">Back</button></a>
+   </div>
+   {% endfor %} -->
+   <h2>Search Results for "{{ loc }}"</h2>
+    {% if venues %}
+        
+            {% for venues in venues %}
+            <div class="col-md-4  mt-3 p-3">
+                <img src="{{venues.image.url}}" class="card-img-top" alt="products" style="width:100%; height:300px; box-shadow:  8px 15px 9px #8d8893; object-fit:cover;border-radius: 0%  0% 0% 0%;">
+           </div>
+                <div class="col-md-8 mt-3 p-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Name:{{venues.vname}}</h5>
+                        <p class="card-text">Description:{{venues.desc}}</p>
+                        <p class="card-text">Price:{{venues.price}}</p>
+                        <h5 class="card-title"><b><i class="bi bi-geo-alt">{{venues.state}}</i></b></h5>
+                        <p class="card-text"><i class="bi bi-geo-fill">{{venues.location}}</p></i>
+                      </div>
+                       <a href="/book_venue/{{venues.vid}}"><button type="button" class="btn btn-danger" style="box-shadow:8px 5px 9px #8d8893;">Booking</button></a>
+                       <a href="/rating/{{venues.vid}}"><button type="button" class="btn btn-danger"style="box-shadow:8px 5px 9px #8d8893;" >Ratings</button></a>
+                       <a href="/"><button type="button" class="btn btn-danger" style="box-shadow:8px 5px 9px #8d8893;">Back</button></a>
+                   </div>
+            {% endfor %}
+        
+    {% else %}
+        <p>No venues found for the specified location.</p>
+    {% endif %}
+</div>
+{% endblock %}

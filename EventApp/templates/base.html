@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+         HeartEvent
+        {% endblock %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+
+
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <style>
+      body{
+        background-color:#fff1e6c6;
+       
+    }
+    /*label{
+        width: 80px;
+        height: 80px;
+        background: #ff7096;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+    
+    }
+    input{
+        position:absolute;
+        opacity:0;
+    
+    }
+    .sun{
+      position:absolute;
+        font-size: 3em;
+        color:#666;
+        filter: drop-shadow(0,0,2px rgba(0,0,0,.5));
+        transform: scale(0);
+        transition: 1s ease;
+        
+    }
+    input:checked~.sun{
+      transition-delay: .8s;
+      transform:scale(1) rotate(360deg);
+    }
+    
+    .moon{
+        font-size: 3em;
+        color:#666;
+        filter: drop-shadow(0,0,2px rgba(0,0,0,.5));
+        transition: 1s ease;
+        transition-delay: .8s;
+    
+    }
+    input:checked~.moon{
+      transition-delay: 0s;
+      transform: rotate(360deg) scale(0);
+    }
+    
+    .toggle{
+        position: absolute;
+        display: block;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        box-shadow: inset 8px 60px rgba(0,0,0,.1),
+                    inset 8px 8px rgba(0,0,0,.1),
+                    inset -4px 4px rgba(0,0,0,.1),;
+        z-index: -1;
+        transition: 1s;
+        
+    }
+    input:checked~.toggle{
+      background: #f8f8f8;
+
+    }
+    .animatebg{
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      background: #000000;
+      z-index:-2;
+      clip-path:circle(0% at 50% 50%);
+      transition: 1.5s ease-out;
+
+    }
+    input:checked~.animatebg{
+      clip-path: circle(150% at 50% 50%);
+    }*/
+   .nav-item{
+    font-size:larger;
+    
+
+   }
+   
+    </style>
+</head>
+<body>
+  <!-- <img  class="bg-image" src="{% static 'images/home.jpg' %}" alt="wed" width="1500vw">  -->
+    <!--Header-->
+    <div class="container-fluid" >
+        <div class="row"  >
+            <nav class="navbar navbar-expand-lg " style="background-color:#fff1e6c6; padding-top: 4%;">
+                <div class="container-fluid">
+                  <a class="navbar-brand" style="font-size: 180%;" href="/">MOMENTUMAVENUE</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                      </li>
+                      <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Venue</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Events</a>
+                      </li> -->
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Ratings</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/register_user">Register</a>
+                      </li>
+                      {% if user.is_authenticated %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="/logout_user">Logout</a>
+                      </li>
+                      {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="/login_user">Login</a>
+                      </li>
+                      {% endif %}
+                      {% if user.is_authenticated %}
+                      <li class="nav-item">
+                        <a class="nav-link" >Welcome {{user.username}}</a>
+                      </li>
+                      {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link" >Welcome !! Guest</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                     <!-- <li class="nav-item"> -->
+                      <!-- <h4><i class="bi bi-moon" ></i></h4> --> 
+                    <!--   <label>
+                        <input type="checkbox">
+                        <ion-icon name="sunny-outline" class="sun"></ion-icon>
+                        <ion-icon name="moon-outline" class="moon"></ion-icon>
+                        <span class="toggle"></span>
+                        <span class="animatebg"></span>
+                      </label> -->
+                      
+                      </li> 
+                     
+                     <!--  <li class="nav-item">
+                      <h4><i class="bi bi-brightness-high"></i></h4> 
+                      </li> -->
+                      <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+                      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
+                    </ul>
+                    <form class="d-flex" role="search" method="post" action="">
+                      {% csrf_token %}
+                      <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit"><i class="fas fa-search">Search</i></button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
+        </div>
+       
+    <!--End Of Header-->
+    
+        <div class="row">
+            {% block body %}
+
+            {% endblock %}
+        </div>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+    <!--Footer-->
+    <div id="carouselIndicators" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active p-5">
+                <div class="row">
+                    {% for x in first_three_venues %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card m-3 p-2" style="width: 20rem; height:33rem; box-shadow: 8px 15px 9px #8d8893; border-radius: 0px 0px;">
+                            <img src="{{x.image.url}}" class="card-img-top" alt="image"width="100%" height="250px" >
+                            <div class="card-body box">
+                                <h5 class="card-title">{{x.vname}}</h5>
+                                <p class="card-text"> ₹{{x.price}}</p>
+                                <h5 class="card-title"><b><i class="bi bi-geo-alt">{{x.state}}</i></b></h5>
+                                <p class="card-text"><i class="bi bi-geo-fill">{{x.location}}</p></i>
+                                {% if user.is_authenticated %}
+                                <a href="/book_venue/<int:vid>" class="btn btn-primary">View Details</a>
+                                {% else %}
+                                <a href="/login_user" class="btn btn-primary">Login</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="carousel-item p-5">
+                <div class="row">
+                    {% for x in next_three_venues %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card m-3 p-2" style="width: 20rem; height:33rem; box-shadow:  8px 15px 9px #8d8893; border-radius: 0px 0px;">
+                            <img src="{{x.image.url}}" class="card-img-top" alt="image" width="100%" height="250px">
+                            <div class="card-body box">
+                                <h5 class="card-title">{{x.vname}}</h5>
+                                <p class="card-text"> ₹{{x.price}}</p>
+                                <h5 class="card-title"  ><b><i class="bi bi-geo-alt">{{x.state}}</i></b></h5>
+                                <p class="card-text">{{x.location}}</p>
+                                {% if user.is_authenticated %}
+                                <a href="/book_venue/<int:vid>" class="btn btn-primary">View Details</a>
+                                {% else %}
+
+                                <a href="/login_user" class="btn btn-primary">Login</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+        <!-- <div class="row">
+            <div class="col-md-4">
+                <h3>Address</h3>
+                <hr>
+                
+            </div>
+            <div class="col-md-4">
+                <h3>Links</h3>
+                <hr>
+                
+            </div>
+            <div class="col-md-4">
+                <h3>Contact_Us</h3>
+                <hr>
+                <h2><a href=""><i class="bi bi-whatsapp"></i></a><br></h2>
+                <h2><a href="https://www.instagram.com/codewithharry/?hl=en"><i class="bi bi-instagram"></i></a><br></h2>
+                <h2><a href="https://www.youtube.com/@CodeWithHarry"><i class="bi bi-youtube"></i></a><br></h2>
+                
+            </div>
+        </div>  -->
+        <!--End Of footer-->
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   
+</body>
+</html>
