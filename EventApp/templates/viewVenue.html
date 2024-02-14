@@ -37,9 +37,15 @@
                         <h5 class="card-title"><b><i class="bi bi-geo-alt">{{venues.state}}</i></b></h5>
                         <p class="card-text"><i class="bi bi-geo-fill">{{venues.location}}</p></i>
                       </div>
-                       <a href="/book_venue/{{venues.vid}}"><button type="button" class="btn btn-danger" style="box-shadow:8px 5px 9px #8d8893;">Booking</button></a>
-                       <a href="/rating/{{venues.vid}}"><button type="button" class="btn btn-danger"style="box-shadow:8px 5px 9px #8d8893;" >Ratings</button></a>
-                       <a href="/"><button type="button" class="btn btn-danger" style="box-shadow:8px 5px 9px #8d8893;">Back</button></a>
+                      {% if user.is_authenticated %}
+                        <a href="/book_venue/{{venues.vid}}"><button type="button" class="btn btn-danger" style="box-shadow:8px 5px 9px #8d8893;">Booking</button></a>
+                        <a href="/rating/{{venues.vid}}"><button type="button" class="btn btn-danger"style="box-shadow:8px 5px 9px #8d8893;" >Ratings</button></a>
+                        <a href="/"><button type="button" class="btn btn-danger" style="box-shadow:8px 5px 9px #8d8893;">Back</button></a>
+                      {% else %} 
+                       <a href="/login_user"><button type="button" class="btn btn-danger" style="box-shadow:8px 5px 9px #8d8893;">Booking</button></a>
+                       <a href="/login_user"><button type="button" class="btn btn-danger"style="box-shadow:8px 5px 9px #8d8893;" >Ratings</button></a>
+                       <a href="/index"><button type="button" class="btn btn-danger" style="box-shadow:8px 5px 9px #8d8893;">Back</button></a>
+                     {% endif %} 
                    </div>
             {% endfor %}
         

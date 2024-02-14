@@ -139,92 +139,37 @@ def logout_user(request):
     return redirect("/")
 
 # Initialize Razorpay client
-""" client = razorpay.Client(auth=("rzp_test_NrRhkRo3jmQAld", "bRhdIMqipkByzTXcIkfMc9bW")) """
-"""  booking = Booking.objects.filter(user=request.user,is_completed=False) """
-
-""" def payment(request):
-    venue = get_object_or_404(Venue, pk=vid,user=request.user,is_completed=False)
-    
-    
-    total_price=0
-    for x in venue:
-        total_price+=(x.venue.price * x.quantity)
-        vid=x.vid 
-
-    client = razorpay.Client(auth=("rzp_test_NrRhkRo3jmQAld", "bRhdIMqipkByzTXcIkfMc9bW"))  
-    data={"amount": total_price * 100,
-          "currency": "INR",
-          "receipt": "vid"
-          }   
-    payment=client.booking.create(data = data)
-    context={}
-    context['data']=payment
-    context['amount']=payment['amount']
-    c=Booking.objects.filter(user=request.user) 
-    venue.delete()  
-    venue.update(is_completed=True)
-    return render(request,"payment.html",context)  """
 def makePayment(request):
-    c=Venue.objects.filter(user=request.user)
-    
+    print(request.user)
+    c = Booking.objects.filter(user =  request.user, is_completed = False)
     oid=random.randrange(1000,9999)
     for x in c:
-        Order.objects.create(order_id=oid,vid=x.venue.vid,quantity=x.quantity,user=request.user)
+        print(oid)
+        print(x.venue.vid)
+        Order.objects.create(order_id=oid,venue=x.venue,quantity=x.quantity,user=request.user)
     orders=Order.objects.filter(user=request.user,is_completed=False)
     
     total_price=0
     for x in orders:
-        total_price+=(x.venue.price * x.quantity)
+        """  print(x.venue.price)
+        print(x.quantity) """
+        total_price+=(x.venue.price)
+        print("Total Price:" ,total_price)
         oid=x.order_id
     client = razorpay.Client(auth=("rzp_test_NrRhkRo3jmQAld", "bRhdIMqipkByzTXcIkfMc9bW"))
-    data={"amount": total_price * 100,
+    data={"amount": total_price,
           "currency": "INR",
           "receipt": "oid"}
-    payment=client.order.create(data = data)
+    payment=client.order.create(data = data) 
     context={}
     context['data']=payment
     context['amount']=payment['amount']
     c=Booking.objects.filter(user=request.user)
-    c.delete()
+    c.delete() 
     orders.update(is_completed=True)
     return render(request,"payment.html",context)
 
-    
-""" def payment(request, bid):
-    # Assuming each booking is for a single venue and the price is fixed per booking
-    booking = get_object_or_404(Booking, pk=bid, user=request.user, is_completed=False)
-    
-    # Since booking is a single object (due to get_object_or_404), no need to loop through
-    total_price = booking.venue.price
 
-    client = razorpay.Client(auth=("rzp_test_NrRhkRo3jmQAld", "bRhdIMqipkByzTXcIkfMc9bW"))  
-    data = {
-        "amount": total_price * 100,  # Razorpay expects the amount in the smallest currency unit (paisa for INR)
-        "currency": "INR",
-        "receipt": f"bid-{bid}"  # Modified to include bid for unique receipt identifier
-    }
-    payment = client.order.create(data=data)  # Assuming you meant client.order.create instead of client.booking.create
-    context = {
-        'data': payment,
-        'amount': total_price
-    }
-    booking.is_completed = True  # Mark the booking as completed
-    booking.save()  # Save the updated booking
-
-    return render(request, "payment.html", context) """
-    # Assuming 'amount' is in rupees, multiply by 100 to convert to paise
-    # Razorpay expects the amount in the smallest currency unit (paise)
-    
-    
-    
- 
-    
-    
-    
-    
-      
- 
- 
 @login_required  # Ensure that only authenticated users can submit ratings
 def rating(request, vid):
     venue = get_object_or_404(Venue, pk=vid)

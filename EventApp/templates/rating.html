@@ -18,8 +18,8 @@
         <p>You have already rated this venue.</p>
     {% endif %}
 {% else %}
-    <p>Please <a href="{% url 'login' %}">login</a> to rate this venue.</p>
-    <a href="/"><button type="button" class="btn btn-primary" style="box-shadow:8px 5px 9px #8d8893;">Back</button></a>
+    <p>Please <a href="/login_user">login</a> to rate this venue.</p>
+    <a href="/index"><button type="button" class="btn btn-primary" style="box-shadow:8px 5px 9px #8d8893;">Back</button></a>
 {% endif %}
 
 {% endblock  %}

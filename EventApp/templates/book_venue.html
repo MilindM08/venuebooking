@@ -43,7 +43,7 @@
         {{ form.as_table }}
         {% if user.is_authenticated %}
 
-        <button type="submit" class="btn btn-primary"><a href="/makePayment">Book Venue</a></button>
+        <button type="submit" class="btn btn-primary" ><a href="{% url 'makePayment' %}" style="color: white;">Book Venue</a></button>
         <!--  <a href="/payment"><button type="submit" class="btn btn-primary">Book Venue</button></a> -->
         {% else%}
     
